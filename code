@@ -34,6 +34,4 @@ optimizer = optim.SGD(resnet50.parameters( ), lr=0.001, momentum=0.9)
 
 #tải mô hình
 model = torch.load(PATH)
-model.module.state_dict()
-torch.nn.DataParallel
 model.eval()
