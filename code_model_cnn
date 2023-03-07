@@ -7,6 +7,8 @@ from PIL import Image
 import requests
 from numpy import dot
 from numpy.linalg import norm
+import numpy as np
+from tempfile import TemporaryFile
 # Tải mô hình được đào tạo trước
 model = models.resnet18(pretrained=True)
 # Sử dụng đối tượng mô hình để chọn lớp mong muốn
@@ -38,4 +40,23 @@ def get_vector(image_name):
     # 8. Trả về vector đặc trưng
     X = my_embedding.numpy().astype('float64')
     return X
+
+# for loop
+# lấy tất cả jpg trong folder -> get_vector -> save npy folder
+jpg_folder = "D:/harris/anh_lichsu/"
+npy_folder = "D:/harris/npy_lichsu"
+
+import os
+from glob import glob
+
+filename_list = glob(os.path.join(jpg_folder, "*.jpg"))
+
+for filename in filename_list:
+    print(filename) # abc.jpg + npy 
+    vector = get_vector(filename)
+    new_name = os.path.join("D:/harris/npy_lichsu", filename.replace("jpg", "") + "npy")
+    with open(new_name, 'wb') as f:
+        print("ahihi")
+        print(new_name)
+        np.save(f ,vector)
 
